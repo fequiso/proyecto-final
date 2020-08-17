@@ -77,3 +77,9 @@ input[type="submit"]:hover{
   background: #CCC;
   cursor: pointer;
 }
+
+.alerta{
+  font-size: 12px;
+  text-align: center;
+  color: #FD0100;
+}
