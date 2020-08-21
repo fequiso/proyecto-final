@@ -1,8 +1,16 @@
 <?php
   $alert = '';
+  session_start();
+  if (!empty($_SESSION['active']))
+  {
+    header('location: gaaa/');
+
+  }else {
+
    if (!empty($_POST))
    {
-     if (empty($_POST['usuario']) || empty($_POST['clave'])) {
+     if (empty($_POST['usuario']) || empty($_POST['clave']))
+     {
 
        $alert = 'ingrese su usuario y contraseña';
 
@@ -16,7 +24,7 @@
 
        if ($result > 0) {
          $data = mysqli_fetch_array($query);
-         session_start();
+
          $_SESSION['active'] = true;
          $_SESSION['idUser'] = $data['idusuario'];
          $_SESSION['nombre'] = $data['nombre'];
@@ -28,9 +36,11 @@
 
        }else{
          $alert = 'usuario y contraseña incorrectos';
+         session_destroy();
        }
      }
    }
+ }
  ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
