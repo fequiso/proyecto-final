@@ -1,0 +1,159 @@
+@import url(../fonts/GothamBook.css);
+@import url(../fonts/GothamBold.css);
+*{
+	margin:     0;
+	padding:    0;
+	box-sizing: border-box;
+}
+body{
+	background: #ccc;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family:    arial;
+    font-weight:    bold;
+    letter-spacing: 1px;
+}
+h1{
+	font-size: 26px;
+}
+h2{
+	font-size: 20px;
+}
+h3{
+	font-size: 18px;
+}
+h4{
+	font-size: 16px;
+}
+h5{
+	font-size: 14px;
+}
+h6{
+	font-size: 12px;
+}
+p{
+	font-family:   arial;
+	letter-spacing:2px;
+	font-size:     14px;
+	line-height:   20px;
+}
+a{
+	text-decoration:none;
+	font-family:    arial;
+	letter-spacing: 1px;
+}
+span {
+    font-family: arial;
+    letter-spacing: 1px;
+    font-size: 14px;
+    line-height: 20px;
+}
+header{
+	position: fixed;
+	width: 100%;
+}
+.header{
+	color: #FFF; /*letra titulo*/
+	background: #FF6900; /*fondo titulo*/
+	height: 50px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+}
+.optionsBar{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.optionsBar span {
+    color:#000000; /*linea*/
+    font-size: 11pt;
+    font-family: 'GothamBook';
+    text-transform: uppercase;
+    margin-left: 30px;
+}
+.photouser {
+    margin-left: 30px;
+    width: 25px;
+    height: 25px;
+}
+.close{
+	width: 25px;
+    height: 25px;
+}
+.optionsBar a {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    margin-left: 30px;
+}
+nav ul{
+	background: #FFF; /*barra*/
+	list-style: none;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+
+
+nav ul > li a{
+	position: relative;
+}
+nav a{
+	color: rgb(0, 0, 0);
+	display: block;
+	font-size: 10pt;
+	font-family: arial;
+	padding: 15px 30px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	transition: background .5s;
+	border-right: 1px solid #000000;
+}
+nav .principal > a{
+    background: url(../images/arrow_bottom.png) no-repeat;
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto auto;
+    background-position: 94% center;
+    background-size: 10px;
+}
+nav ul li:hover ul{
+	display: block;
+}
+nav li ul{
+	background: #fff; /*al pasar el mause*/
+	display: none;
+	flex-direction: column;
+	position: absolute;
+	align-items: flex-start;
+}
+nav li ul a{
+	position: relative;
+	padding: 10px 30px;
+	border-right: initial;
+}
+nav li ul a:hover{
+	background: #FF6900;
+}
+nav li ul li:last-child{
+	overflow: hidden;
+}
+#container{
+	padding: 90px 15px 15px;
+}
