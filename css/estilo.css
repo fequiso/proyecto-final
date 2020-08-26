@@ -4,9 +4,9 @@
   box-sizing: border-box;
 }
 
-h3{
+h2{
   text-align: center;
-  color: blue
+  color: #000;
 }
 
 #contenedor{

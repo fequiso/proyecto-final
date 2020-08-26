@@ -16,8 +16,8 @@
 
      }else {
        require_once 'conexion.php';
-       $user = $_POST['usuario'];
-       $pass = $_POST['clave'];
+       $user = mysqli_real_escape_string($conexion,$_POST['usuario']);
+       $pass = md5(mysqli_real_escape_string($conexion,$_POST['clave']));
 
        $query = mysqli_query($conexion, "SELECT * FROM usuario WHERE usuario='$user' AND clave='$pass'");
        $result = mysqli_num_rows($query);
@@ -48,11 +48,15 @@
     <meta charset="utf-8">
     <title>ARTEFACTOS ELECTRÓNICOS</title>
     <link rel="stylesheet" href="css/estilo.css">
+    <style>{
+      background-image: url("fondo.png");
+    }
+    </style>
   </head>
   <body>
     <section id="contenedor">
       <form class="" action="" method="post">
-        <h3>INICIAR SESIÓN</h3>
+        <h2>INICIAR SESIÓN</h2>
         <img src="imagenes/user.png" width="200" height="200" alt="login">
         <input type="text" name="usuario" placeholder="usuario" value="">
         <input type="password" name="clave" placeholder="contraseña" value="">
