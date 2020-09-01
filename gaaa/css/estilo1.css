@@ -236,6 +236,7 @@ input,select{
 	border-radius: 4px;
 	margin: 20px;
 }
+
 table{
 	border-collapse: collapse;
 	font-size: 12pt;
@@ -259,7 +260,7 @@ table td{
 }
 
 .link_edit{
-	color: #0ca4ce;
+	color: #0200CD;
 }
 
 .link_delete{

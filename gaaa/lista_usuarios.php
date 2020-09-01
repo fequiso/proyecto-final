@@ -7,52 +7,6 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include 'includes/scripts.php'; ?>
-	<style media="screen">
-		#container h1{
-			font-size: 35px;
-			display: inline-block;
-		}
-
-		.btn_new{
-			display: inline-block;
-			background: #239baa;
-			color: #fff;
-			padding: 5px 25px;
-			border-radius: 4px;
-			margin: 20px;
-		}
-
-		table{
-			border-collapse: collapse;
-			font-size: 12pt;
-			font-family: arial;
-			width: 100%;
-		}
-
-		table th{
-			text-align: left;
-			padding: 10px;
-			background: #FE6A00;
-			color: #000;
-		}
-
-		table tr:nth-child(odd){
-			background: #FFF;
-		}
-
-		table td{
-			padding: 10px;
-		}
-
-		.link_edit{
-			color: #0200CD;
-		}
-
-		.link_delete{
-			color: #000; /* cambiar color a rojo*/
-		}
-
-	</style>
 	<title>Usuarios</title>
 </head>
 <body>
