@@ -1,4 +1,7 @@
 <?php
+
+	include "../conexion.php";
+
 	if (!empty($_POST))
 	{
 		$alert='';
@@ -9,14 +12,26 @@
 			$alert='<p class="msg_error">Todos los campos son obligatorios</p>';
 		}else{
 
-			include "../conexion.php";
 			$nombre = $_POST['nombre'];
 			$email = $_POST['correo'];
 			$user   = $_POST['usuario'];
-			$clave  = $_POST['clave'];
+			$clave  = md5($_POST['clave']);
 			$rol    = $_POST['rol'];
-			echo "SELECT * FROM usuario where usuario='$user' or correo='$email' ";
-			//$query = mysqli_query($conexion,"")
+
+			$query = mysqli_query($conexion,"SELECT * FROM usuario where usuario='$user' or correo='$email' ");
+			$result = mysqli_fetch_array($query);
+
+			if ($result > 0) {
+				$alert='<p class="msg_error">El usuario ya existe</p>';
+			}else{
+				$query_insert = mysqli_query($conexion,"INSERT INTO usuario(nombre,correo,usuario,clave,rol)
+																										VALUES('$nombre','$email','$user','$clave','$rol')");
+				if ($query_insert) {
+					$alert='<p class="msg_save">usuario creado correcto</p>';
+				}else{
+					$alert='<p class="msg_error">no se pudo crear usuario</p>';
+				}
+			}
 		}
 	}
  ?>
@@ -26,7 +41,7 @@
 	<meta charset="UTF-8">
 	<?php include 'includes/scripts.php'; ?>
 	<title>Registro Usuario</title>
-	<style media="screen">
+	<!-- <style media="screen">
 	.form_register{
 		width: 450px;
 		margin: auto;
@@ -93,7 +108,7 @@
 	.alert p{
 		padding: 10px;
 	}
-</style>
+</style> -->
 </head>
 <body>
 	<?php include 'includes/header.php'; ?>
@@ -101,7 +116,7 @@
 		<div class="form_register">
 			<h1>Registro usuario</h1>
 			<hr>
-			<div class="alert"></div>
+			<div class="alert"><?php echo isset($alert) ? $alert:''; ?></div>
 
 			<form action="" method="post">
 				<label for="nombre">Nombre</label>
@@ -113,10 +128,20 @@
 				<label for="clave">Contraseña</label>
 				<input type="password" name="clave" id="clave" placeholder="Clave de acceso">
 				<label for="rol">Tipo Usuario</label>
+				<?php
+					$query_rol = mysqli_query($conexion,"SELECT * FROM rol");
+					$result_rol =  mysqli_num_rows($query_rol);
+				 ?>
 				<select  name="rol" id="rol">
-					<option value="1">Administrador</option>
-					<option value="2">Supervisor</option>
-					<option value="3">Vendedor</option>
+					<?php
+					if ($result_rol>0) {
+						while ($rol =  mysqli_fetch_array($query_rol)) {
+					?>
+						<option value="<?php echo $rol["idrol"]; ?>"><?php echo $rol["rol"] ?></option>
+					<?php
+						}
+					}
+					 ?>
 				</select>
 				<input type="submit" value="Crear usuario" class="btn_save">
 			</form>

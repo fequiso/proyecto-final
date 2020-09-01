@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include 'includes/scripts.php'; ?>
-	<title>ELECTRONICA | FEQUISO</title>
+	<title><!--titulo --></title>
 </head>
 <body>
 	<?php include 'includes/header.php'; ?>

@@ -48,9 +48,6 @@
     <meta charset="utf-8">
     <title>ARTEFACTOS ELECTRÓNICOS</title>
     <link rel="stylesheet" href="css/estilo.css">
-    <style>{
-      background-image: url("fondo.png");
-    }
     </style>
   </head>
   <body>
