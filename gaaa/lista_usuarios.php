@@ -17,10 +17,11 @@
 		<table>
 				<tr>
 					<th>ID</th>
-					<th>Nombre</th>
-					<th>Correo</th>
-					<th>rol</th>
-					<th>Acciones</th>
+					<th>NOMBRE</th>
+					<th>CORREO</th>
+					<th>USUARIO</th>
+					<th>ROL</th>
+					<th>ACCIONES</th>
 				</tr>
 
 				<?php
@@ -36,9 +37,10 @@
 					<td><?php echo $data["idusuario"]; ?></td>
 					<td><?php echo $data["nombre"]; ?></td>
 					<td><?php echo $data["correo"]; ?></td>
+					<td><?php echo $data["usuario"]; ?></td>
 					<td><?php echo $data["rol"]; ?></td>
 					<td>
-						<a class="link_edit" href="#">editar</a>
+						<a class="link_edit" href="editar_usuario.php?id=<?php echo $data["idusuario"]; ?>">editar</a>
 						|
 						<a class="link_delete" href="#">eliminar</a>
 					</td>

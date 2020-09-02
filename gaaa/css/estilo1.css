@@ -162,7 +162,7 @@ nav li ul li:last-child{
 }
 
 .form_register h1{
-	color: #3c93b0;
+	color: #000000;
 }
 
 hr{
@@ -196,11 +196,15 @@ input,select{
 	border-radius: 5px;
 }
 
+.noItemOne option:first-child{
+	display: none;
+}
+
 .btn_save{
 	font-size: 12pt;
-	background: #12a4c6;
+	background: #0059ff;
 	padding: 10px;
-	color: black;
+	color: #FFF;
 	letter-spacing: 1px;
 	border: 0;
 	cursor: pointer;
@@ -209,7 +213,7 @@ input,select{
 
 .alert{
 	width: 100%;
-	background: #66e07d66;
+	background: #b8bfc7;
 	border-radius: 6px;
 	margin: 20px auto;
 }
@@ -226,11 +230,12 @@ input,select{
 #container h1{
 	font-size: 35px;
 	display: inline-block;
+
 }
 
 .btn_new{
 	display: inline-block;
-	background: #239baa;
+	background: #0077ff;
 	color: #fff;
 	padding: 5px 25px;
 	border-radius: 4px;
@@ -264,5 +269,5 @@ table td{
 }
 
 .link_delete{
-	color: #000; /* cambiar color a rojo*/
+	color: red; /* cambiar color a rojo*/
 }

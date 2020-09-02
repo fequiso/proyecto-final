@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<link rel="icon" href="/css/master.css"> <!-- agregar icono -->
 	<?php include 'includes/scripts.php'; ?>
 	<title><!--titulo --></title>
 </head>
