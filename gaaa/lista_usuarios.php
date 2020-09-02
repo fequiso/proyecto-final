@@ -42,7 +42,7 @@
 					<td>
 						<a class="link_edit" href="editar_usuario.php?id=<?php echo $data["idusuario"]; ?>">editar</a>
 						|
-						<a class="link_delete" href="#">eliminar</a>
+						<a class="link_delete" href="eliminar_confirmar_usuario.php?id=<?php echo $data["idusuario"]; ?>">eliminar</a>
 					</td>
 				</tr>
 	<?php
