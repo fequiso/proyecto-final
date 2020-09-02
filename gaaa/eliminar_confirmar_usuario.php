@@ -1,9 +1,26 @@
 <?php
-	if (empty($_REQUEST['id'])) {
+
+	include "../conexion.php";
+
+	if (!empty($_POST)) {
+
+		$idusuario = $_POST['idusuario'];
+
+		//$query_delete = mysqli_query($conexion,"DELETE FROM usuario WHERE idusuario=$idusuario"); para eliminar
+		$query_delete = mysqli_query($conexion,"UPDATE usuario SET estatus=0 WHERE idusuario=$idusuario");//solo ocultar
+
+		if ($query_delete) {
+			header("location: lista_usuarios.php");
+		}else {
+			echo "Error al eliminar";
+		}
+	}
+
+	if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
 		header("location: lista_usuarios.php");
 
 	}else {
-		include "../conexion.php";
+
 		$idusuario = $_REQUEST['id'];
 		$query = mysqli_query($conexion,"SELECT u.nombre,u.usuario,r.rol FROM usuario u
 																			INNER JOIN rol r ON u.rol=r.idrol
@@ -28,36 +45,6 @@
 	<meta charset="UTF-8">
 	<link rel="icon" href="/css/master.css"> <!-- agregar icono -->
 	<?php include 'includes/scripts.php'; ?>
-	<style>
-	.data_delete{
-		text-align: center;
-	}
-	.data_delete h2{
-		font-size: 12pt;
-		color: red;
-	}
-	.data_delete span{
-		font-weight: bold;
-		color: #000032; /*color de letra*/
-		font-size: 12pt;
-	}
- .btn_cancel,.btn_ok{
-	width: 124px;
-	background: #0030CB;
-	color:  #fff;
-	display: inline-block;
-	padding: 5px;
-	border-radius: 5px;
-	cursor: pointer;
-	margin: 15px;
- }
- .data_delete form{
-	 background: initial;
-	 margin: auto;
-	 padding: 20px 5px;
-	 border: 0;
- }
-	</style>
 	<title>Eliminar usuario</title>
 </head>
 <body>
@@ -70,9 +57,10 @@
 			<p>Usuario:<span><?php echo $usuario; ?></span></p>
 			<p>Tipo de usuario:<span><?php echo $rol; ?></span></p>
 
-			<form>
+			<form method="post" action="">
+				<input type="hidden" name="idusuario" value="<?php echo $idusuario; ?>">
 				<a href="lista_usuarios.php" class="btn_cancel">Cancelar</a>
-				<input type="submit" name="" value="Aceptar" class="btn_ok">
+				<input type="submit" value="Aceptar" class="btn_ok">
 			</form>
 		</div>
 

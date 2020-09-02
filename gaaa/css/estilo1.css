@@ -271,3 +271,32 @@ table td{
 .link_delete{
 	color: red; /* cambiar color a rojo*/
 }
+ /* ------------- eliminar_confirmar_usuario --------------*/
+ .data_delete{
+	 text-align: center;
+ }
+ .data_delete h2{
+	 font-size: 12pt;
+	 color: red;
+ }
+ .data_delete span{
+	 font-weight: bold;
+	 color: #000032; /*color de letra*/
+	 font-size: 12pt;
+ }
+ .btn_cancel,.btn_ok{
+ width: 124px;
+ background: #0030CB;
+ color:  #fff;
+ display: inline-block;
+ padding: 5px;
+ border-radius: 5px;
+ cursor: pointer;
+ margin: 15px;
+ }
+ .data_delete form{
+	background: initial;
+	margin: auto;
+	padding: 20px 5px;
+	border: 0;
+ }
