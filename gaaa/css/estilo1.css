@@ -300,3 +300,57 @@ table td{
 	padding: 20px 5px;
 	border: 0;
  }
+ /* /////////////////// paginador ////////////////////*/
+ .paginador ul{
+	 padding: 15px;
+	 list-style: none;
+	 background: #fff;
+	 margin-top: 15px;
+	 display: -webkit-flex;
+	 display: -moz-flex;
+	 display: -ms-flex;
+	 display: -o-flex;
+	 display: flex;
+	 justify-content: flex-end;
+ }
+ .paginador a, .pageSelected{
+	 color: #428bca;
+	 border: 1px solid #ddd;
+	 padding: 5px;
+	 display: inline-block;
+	 font-size: 14px;
+	 text-align: center;
+	 width: 35px;
+ }
+ .paginador a:hover{
+	 background: #0001FC;
+ }
+ .pageSelected{
+	 color: #FFF;
+	 background: #0001FC;
+	 border: 1px solid #428bca;
+ }
+ /* ---------- buscar ------------*/
+ .form_search{
+	 display: -webkit-flex;
+	 display: -moz-flex;
+	 display: -ms-flex;
+	 display: -o-flex;
+	 display: flex;
+	 float: right;
+	 background: initial;
+	 padding: 10px;
+	 border-radius: 10px;
+	 width: 450px;
+ }
+ .form_search .btn_search{
+	 background: #0001FC;
+	 color: #fff;
+	 padding: 0 20px;
+	 border: 0;
+	 cursor: pointer;
+	 margin-left: 10px;
+ }
+ .btn_search{
+	 width: 150px;
+ }

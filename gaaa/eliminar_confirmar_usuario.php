@@ -5,6 +5,7 @@
 	if (!empty($_POST)) {
 		if ($_POST['idusuario'] == 1) {
 			header("location: lista_usuarios.php");
+			mysqli_close($conexion);
 			exit;
 		}
 		$idusuario = $_POST['idusuario'];
@@ -21,13 +22,14 @@
 
 	if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
 		header("location: lista_usuarios.php");
-
+		mysqli_close($conexion);
 	}else {
 
 		$idusuario = $_REQUEST['id'];
 		$query = mysqli_query($conexion,"SELECT u.nombre,u.usuario,r.rol FROM usuario u
 																			INNER JOIN rol r ON u.rol=r.idrol
 																			WHERE u.idusuario = $idusuario");
+		mysqli_close($conexion);
 
 		$result = mysqli_num_rows($query);
 

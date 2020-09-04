@@ -47,16 +47,19 @@
 				}
 			}
 		}
+		mysqli_close($conexion);
 	}
 	//mostrar datos para editar_usuario
 
 	if (empty($_GET['id'])) {
 		header('location: lista_usuarios.php');
+		mysqli_close($conexion);
 	}
 	$iduser = $_GET['id'];
 
 	$sql = mysqli_query($conexion,"SELECT u.idusuario,u.nombre,u.correo,u.usuario,(u.rol) as idrol,(r.rol) as rol
 	                    FROM usuario u INNER JOIN rol r ON u.rol=r.idrol WHERE idusuario=$iduser");
+	mysqli_close($conexion);
 
 	$result_sql = mysqli_num_rows($sql);
 
@@ -110,7 +113,9 @@
 				<input type="password" name="clave" id="clave" placeholder="Clave de acceso">
 				<label for="rol">Tipo Usuario</label>
 				<?php
+				  include "../conexion.php";
 					$query_rol = mysqli_query($conexion,"SELECT * FROM rol");
+					mysqli_close($conexion);
 					$result_rol =  mysqli_num_rows($query_rol);
 				 ?>
 				<select  name="rol" id="rol" class="noItemOne">
