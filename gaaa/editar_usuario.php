@@ -14,7 +14,7 @@
 			$alert='<p class="msg_error">Todos los campos son obligatorios</p>';
 		}else{
 
-			$idUsuario = $_POST['idUsuario'];
+			$idUsuario = $_POST['id'];
 			$nombre = $_POST['nombre'];
 			$email = $_POST['correo'];
 			$user   = $_POST['usuario'];
@@ -25,8 +25,8 @@
 																								where (usuario='$user' and idusuario != $idUsuario)
 																							  or (correo='$email' and idusuario != $idUsuario)");
 
-
 			$result = mysqli_fetch_array($query);
+			//$result = count($result);
 
 			if ($result > 0) {
 				$alert='<p class="msg_error">El correo o usuario ya existe</p>';
@@ -50,15 +50,14 @@
 				}
 			}
 		}
-		mysqli_close($conexion);
 	}
 	//mostrar datos para editar_usuario
 
-	if (empty($_GET['id'])) {
+	if (empty($_REQUEST['id'])) {
 		header('location: lista_usuarios.php');
 		mysqli_close($conexion);
 	}
-	$iduser = $_GET['id'];
+	$iduser = $_REQUEST['id'];
 
 	$sql = mysqli_query($conexion,"SELECT u.idusuario,u.nombre,u.correo,u.usuario,(u.rol) as idrol,(r.rol) as rol
 	                    FROM usuario u INNER JOIN rol r ON u.rol=r.idrol WHERE idusuario=$iduser");
@@ -105,7 +104,7 @@
 			<div class="alert"><?php echo isset($alert) ? $alert:''; ?></div>
 
 			<form action="" method="post">
-				<input type="hidden" name="idUsuario" value="<?php echo $iduser; ?>">
+				<input type="hidden" name="id" value="<?php echo $iduser; ?>">
 				<label for="nombre">Nombre</label>
 				<input type="text" name="nombre" id="nombre" placeholder="Nombre completo" value="<?php echo $nombre; ?>">
 				<label for="correo">Correo electrónico</label>

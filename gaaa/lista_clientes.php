@@ -1,8 +1,5 @@
 <?php
 	session_start();
-	if ($_SESSION['rol'] != 1) {
-		header("location: ./");
-	}
 	include "../conexion.php";
  ?>
 
@@ -11,15 +8,15 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include 'includes/scripts.php'; ?>
-	<title>Lista de Usuarios</title>
+	<title> lista de Clientes</title>
 </head>
 <body>
 	<?php include 'includes/header.php'; ?>
 	<section id="container">
-		<h1>lista de usuarios</h1>
-		<a href="registro_usuario.php" class="btn_new">Crear usuario</a>
+		<h1>lista de Clientes</h1>
+		<a href="registro_cliente.php" class="btn_new">Crear Cliente</a>
 
-		<form action="buscar_usuario.php" method="get" class="form_search">
+		<form action="buscar_cliente.php" method="get" class="form_search">
 			<input type="text" name="busqueda" id="busqueda"  placeholder="buscar">
 			<input type="submit" value="buscar" class="btn_search">
 		</form>
@@ -27,16 +24,16 @@
 		<table>
 				<tr>
 					<th>ID</th>
+					<th>NIT</th>
 					<th>NOMBRE</th>
-					<th>CORREO</th>
-					<th>USUARIO</th>
-					<th>ROL</th>
+					<th>TELÉFONO</th>
+					<th>DIRECCIÓN</th>
 					<th>ACCIONES</th>
 				</tr>
 
 				<?php
 				 // paginador
-				  $sql_registe = mysqli_query($conexion,"SELECT COUNT(*) total_registro FROM usuario WHERE estatus = 1");
+				  $sql_registe = mysqli_query($conexion,"SELECT COUNT(*) total_registro FROM cliente WHERE estatus = 1");
 				 	$result_register = mysqli_fetch_array($sql_registe);
 					$total_registro = $result_register['total_registro'];
 
@@ -52,28 +49,31 @@
 					$total_paginas = ceil($total_registro / $por_pagina);
 
 
-					$query = mysqli_query($conexion,"SELECT u.idusuario, u.nombre, u.correo, u.usuario, r.rol
-						                                      FROM usuario u inner join rol r on u.rol=r.idrol WHERE estatus=1
-																									ORDER BY u.idusuario ASC limit $desde,$por_pagina");
+					$query = mysqli_query($conexion,"SELECT * FROM cliente WHERE estatus=1
+																									ORDER BY idcliente ASC limit $desde,$por_pagina");
 					mysqli_close($conexion);
 					$result = mysqli_num_rows($query);
 
 					if ($result > 0) {
 
 						while ($data = mysqli_fetch_array($query)) {
+							if ($data["nit"] == 0) {
+								$nit = "C/F";
+							}else {
+								$nit = $data["nit"];
+							}
 				?>
 				<tr>
-					<td><?php echo $data["idusuario"]; ?></td>
+					<td><?php echo $data["idcliente"]; ?></td>
+					<td><?php echo $nit ?></td>
 					<td><?php echo $data["nombre"]; ?></td>
-					<td><?php echo $data["correo"]; ?></td>
-					<td><?php echo $data["usuario"]; ?></td>
-					<td><?php echo $data["rol"]; ?></td>
+					<td><?php echo $data["telefono"]; ?></td>
+					<td><?php echo $data["direccion"]; ?></td>
 					<td>
-						<a class="link_edit" href="editar_usuario.php?id=<?php echo $data["idusuario"]; ?>">editar</a>
-
-						<?php  if($data["idusuario"]!=1){	?>
+						<a class="link_edit" href="editar_cliente.php?id=<?php echo $data["idcliente"]; ?>">editar</a>
+						<?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
 						|
-						<a class="link_delete" href="eliminar_confirmar_usuario.php?id=<?php echo $data["idusuario"]; ?>">eliminar</a>
+						<a class="link_delete" href="eliminar_confirmar_cliente.php?id=<?php echo $data["idcliente"]; ?>">eliminar</a>
 					<?php } ?>
 					</td>
 				</tr>
