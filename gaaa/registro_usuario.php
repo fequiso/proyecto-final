@@ -22,7 +22,7 @@
 			$rol    = $_POST['rol'];
 
 			$query = mysqli_query($conexion,"SELECT * FROM usuario where usuario='$user' or correo='$email' ");
-			mysqli_close($conexion); //cerrar conexion
+
 			$result = mysqli_fetch_array($query);
 
 			if ($result > 0) {

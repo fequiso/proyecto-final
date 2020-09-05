@@ -20,15 +20,17 @@
         <li><a href="lista_clientes.php">Lista de Clientes</a></li>
       </ul>
     </li>
-
+    <?php
+      if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+     ?>
     <li class="principal">
       <a href="#">Proveedores</a>
       <ul>
-        <li><a href="#">Nuevo Proveedor</a></li>
-        <li><a href="#">Lista de Proveedores</a></li>
+        <li><a href="registro_proveedor.php">Nuevo Proveedor</a></li>
+        <li><a href="lista_proveedor.php">Lista de Proveedores</a></li>
       </ul>
     </li>
-
+  <?php } ?>
     <li class="principal">
       <a href="#">Productos</a>
       <ul>
