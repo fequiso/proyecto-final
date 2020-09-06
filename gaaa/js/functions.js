@@ -43,7 +43,31 @@ $(document).ready(function(){
     // modal fomr add_product
     $('.add_product').click(function(e){
       e.preventDefault();
-      var producto = $(this).attr('product')
+      var producto = $(this).attr('product');
+      var action = 'infoProducto';
+
+
+      $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        async: true,
+        data: {action:action,producto:producto},
+
+          success: function(response){
+            if (response != 'error') {
+
+              var info = JSON.parse(response);
+              $('#producto_id').val(info.codproducto);
+              $('.nameProducto').html(info.descripcion);
+            }
+
+          },
+
+          error: function(error) {
+            console.log(error);
+          }
+      });
+
       $('.modal').fadeIn();
     });
 
