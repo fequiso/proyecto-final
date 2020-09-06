@@ -39,7 +39,7 @@
          ?>
         <li><a href="registro_producto.php">Nuevo Producto</a></li>
         <?php } ?>
-        <li><a href="#">Lista de Productos</a></li>
+        <li><a href="lista_producto.php">Lista de Productos</a></li>
       </ul>
     </li>
     <li class="principal">

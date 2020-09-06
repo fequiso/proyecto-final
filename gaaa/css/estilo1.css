@@ -272,6 +272,11 @@ table td{
 .link_delete{
 	color: red; /* cambiar color a rojo*/
 }
+
+.link_add{
+	color: green;
+}
+
  /* ------------- eliminar_confirmar_usuario --------------*/
  .data_delete{
 	 text-align: center;
@@ -413,9 +418,47 @@ table td{
 	top: -10px;
 	z-index: 10;
 }
-#tbl_list_productos img{
-	width: 50px;
+
+
+
+/* _---------------- lista producto img ---------*/
+.img_producto img{
+	width: 90px;
+	height: auto;
+	margin: auto;
 }
 .imgProductoDelete{
 	width: 175px;
+}
+.modal{
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.85);
+	display: none;
+}
+.bodyModal{
+	width: 100%;
+	height: 100%;
+	display: -webkit-inline-flex;
+	display: -moz-inline-flex;
+	display: -ms-inline-flex;
+	display: -o-inline-flex;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal h1{
+	color: #0001FC;
+	text-transform: uppercase;
+}
+.modal h2{
+	text-transform: uppercase;
+	margin-top: 15px;
+}
+
+#form_add_product{
+	width: 420px;
+	text-align: center;
 }

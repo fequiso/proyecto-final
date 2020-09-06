@@ -40,5 +40,15 @@ $(document).ready(function(){
     	$("#img").remove();
 
     });
+    // modal fomr add_product
+    $('.add_product').click(function(e){
+      e.preventDefault();
+      var producto = $(this).attr('product')
+      $('.modal').fadeIn();
+    });
 
 });
+
+function coloseModal(){
+  $('.modal').fadeOut();
+}
