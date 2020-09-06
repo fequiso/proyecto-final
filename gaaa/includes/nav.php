@@ -34,11 +34,14 @@
     <li class="principal">
       <a href="#">Productos</a>
       <ul>
-        <li><a href="#">Nuevo Producto</a></li>
+        <?php
+          if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+         ?>
+        <li><a href="registro_producto.php">Nuevo Producto</a></li>
+        <?php } ?>
         <li><a href="#">Lista de Productos</a></li>
       </ul>
     </li>
-
     <li class="principal">
       <a href="#">Facturas</a>
       <ul>

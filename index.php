@@ -29,7 +29,7 @@
          $_SESSION['active'] = true;
          $_SESSION['idUser'] = $data['idusuario'];
          $_SESSION['nombre'] = $data['nombre'];
-         $_SESSION['email']  = $data['email'];
+         $_SESSION['email']  = $data['correo'];
          $_SESSION['user']   = $data['usuario'];
          $_SESSION['rol']    = $data['rol'];
 
@@ -47,7 +47,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>ARTEFACTOS ELECTRÓNICOS</title>
+    <title>Login | Sistema Facturación</title>
     <link rel="stylesheet" href="css/estilo.css">
     </style>
   </head>

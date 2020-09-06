@@ -60,7 +60,7 @@
 	$iduser = $_REQUEST['id'];
 
 	$sql = mysqli_query($conexion,"SELECT u.idusuario,u.nombre,u.correo,u.usuario,(u.rol) as idrol,(r.rol) as rol
-	                    FROM usuario u INNER JOIN rol r ON u.rol=r.idrol WHERE idusuario=$iduser");
+	                    FROM usuario u INNER JOIN rol r ON u.rol=r.idrol WHERE idusuario=$iduser and estatus = 1");
 	mysqli_close($conexion);
 
 	$result_sql = mysqli_num_rows($sql);
