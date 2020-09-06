@@ -39,6 +39,10 @@ $(document).ready(function(){
     	$(".delPhoto").addClass('notBlock');
     	$("#img").remove();
 
+      if ($("#foto_actual") && $("#foto_remove")){
+           $("#foto_remove").val('img_producto.png');
+      }
+
     });
     // modal fomr add_product
     $('.add_product').click(function(e){
@@ -66,11 +70,11 @@ $(document).ready(function(){
                                       '<input type="number" name="cantidad" id="txtCantidad" placeholder="cantidad del producto"'+
                                       'required><br>'+
                                       '<input type="text" name="precio" id="txtPrecio" placeholder="precio del producto" required>'+
-                                
+
                                       '<input type="hidden" name="producto_id" id="producto_id" value="'+info.codproducto+'" required>'+
                                       '<input type="hidden" name="action" value="addProduct" required>'+
                                       '<div class="alert alertAddProduct"></div>'+
-                                
+
                                       '<button type="submit" class="btn_new">agregar</button>'+
                                       '<a href="#" class="btn_ok closeModal" onclick="coloseModal();">cerrar</a>'+
                                     '</form>');
