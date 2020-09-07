@@ -61,6 +61,25 @@
             exit;
         }
 
+        //eliminar producto
+        if ($_POST['action'] == 'delProduct') {
+          if (empty($_POST['producto_id']) || !is_numeric($_POST['producto_id'])) {
+            echo "error";
+          }else {
+              $idproducto = $_POST['producto_id'];
+              //$query_delete = mysqli_query($conexion,"DELETE FROM usuario WHERE idusuario=$idusuario"); para eliminar
+              $query_delete = mysqli_query($conexion,"UPDATE producto SET estatus=0 WHERE codproducto=$idproducto");//solo ocultar
+              mysqli_close($conexion);
+
+              if ($query_delete) {
+                echo "ok";
+              }else {
+                echo "Error";
+              }
+           }
+           echo "error";
+        }
+        exit;
     }
     exit;
 

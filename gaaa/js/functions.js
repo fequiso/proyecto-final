@@ -111,17 +111,17 @@ $(document).ready(function(){
              // $('#producto_id').val(info.codproducto);
               //$('.nameProducto').html(info.descripcion);
 
-              $('.bodyModal').html('<form action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault();sendDataProduct(); ">'+
+              $('.bodyModal').html('<form action="" method="post" name="form_del_product" id="form_del_product" onsubmit="event.preventDefault();delProduct(); ">'+
                                       '<h1>eliminar producto</h1><br>'+
                                       '<p>¿Está serguro que quiere eliminar el producto?<p>'+
                                       '<h2 class="nameProducto">'+info.descripcion+'</h2><br>'+
 
                                       '<input type="hidden" name="producto_id" id="producto_id" value="'+info.codproducto+'" required>'+
-                                      '<input type="hidden" name="action" value="addProduct" required>'+
+                                      '<input type="hidden" name="action" value="delProduct" required>'+
                                       '<div class="alert alertAddProduct"></div>'+
 
-                                      '<a href="#" class="btn_cancel" onclick="coloseModal();">Cancelar</a>'+
-                                      '<button type="submit" class="btn_new">Eliminar</button>'+
+                                      '<a href="#" class="btn_cancel" onclick="coloseModal();">Cerrar</a>'+
+                                      '<button type="submit" class="btn_ok">Eliminar</button>'+
                                     '</form>');
 
             }
@@ -157,6 +157,37 @@ function sendDataProduct() {
           $('#txtPrecio').val('');
           $('.alertAddProduct').html('<p>producto agregado correcto</p>');
         }
+      },
+
+      error: function(error) {
+        console.log(error);
+      }
+  });
+
+}
+
+//eliminar producto
+
+function delProduct() {
+  var pr = $('#producto_id').val();
+  $('.alertAddProduct').html('');
+  $.ajax({
+    url: 'ajax.php',
+    type: 'POST',
+    async: true,
+    data: $('#form_del_product').serialize(),
+
+      success: function(response){
+        console.log(response);
+
+        if (response == 'error') {
+          $('.alertAddProduct').html('<p style"color: red" >error al eliminar producto</p>');
+        }else{
+          $('.row'+pr).remove();
+          $('#form_del_product .btn_ok').remove();
+          $('.alertAddProduct').html('<p>producto eliminado correcto</p>');
+        }
+
       },
 
       error: function(error) {
