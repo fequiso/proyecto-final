@@ -78,8 +78,52 @@
               }
            }
            echo "error";
+           exit;
         }
-        exit;
+
+        //buscar Cliente
+        if ($_POST['action'] == 'searchCliente')
+        {
+            if (!empty($_POST['cliente'])) {
+
+              $nit = $_POST['cliente'];
+              $query = mysqli_query($conexion,"SELECT * FROM cliente WHERE nit LIKE '$nit' AND estatus=1");
+
+              mysqli_close($conexion);
+              $result = mysqli_num_rows($query);
+
+              $data = '';
+              if ($result > 0) {
+                $data = mysqli_fetch_assoc($query);
+              }else{
+                $data = 0;
+              }
+              echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            }
+            exit;
+        }
+
+        //registrar cliente - venta
+        if ($_POST['action'] == 'addCliente')
+        {
+          $nit = $_POST['nit_cliente'];
+          $nombre = $_POST['nom_cliente'];
+          $telefono = $_POST['tel_cliente'];
+          $direccion = $_POST['dir_cliente'];
+          $usuario_id = $_SESSION['idUser'];
+
+          $query_insert = mysqli_query($conexion,"INSERT INTO cliente(nit,nombre,telefono,direccion,usuario_id)
+                                                        VALUES('$nit','$nombre','$telefono','$direccion','$usuario_id')");
+          if ($query_insert) {
+            $codCliente = mysqli_insert_id($conexion);
+            $msg = $codCliente;
+            }else {
+              $msg='error';
+            }
+            mysqli_close($conexion);
+            echo $msg;
+            exit;
+        }
     }
     exit;
 

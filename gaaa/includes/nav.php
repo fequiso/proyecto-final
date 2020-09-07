@@ -43,10 +43,10 @@
       </ul>
     </li>
     <li class="principal">
-      <a href="#">Facturas</a>
+      <a href="#">Ventas</a>
       <ul>
-        <li><a href="#">Nuevo Factura</a></li>
-        <li><a href="#">Facturas</a></li>
+        <li><a href="nueva_venta.php">Nueva venta</a></li>
+        <li><a href="#">Ventas</a></li>
       </ul>
     </li>
 
