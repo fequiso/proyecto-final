@@ -90,7 +90,7 @@
 						|
 						<a class="link_edit" href="editar_producto.php?id=<?php echo $data["codproducto"]; ?>">editar</a>
 						|
-						<a class="link_delete" href="eliminar_confirmar_producto.php?id=<?php echo $data["codproducto"]; ?>">eliminar</a>
+						<a class="link_delete del_product" product="<?php echo $data["codproducto"]; ?>" href="#">eliminar</a>
 					</td>
 					<?php } ?>
 				</tr>

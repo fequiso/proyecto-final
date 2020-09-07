@@ -91,6 +91,51 @@ $(document).ready(function(){
       $('.modal').fadeIn();
     });
 
+    // modal fomr delet_product
+    $('.del_product').click(function(e){
+      e.preventDefault();
+      var producto = $(this).attr('product');
+      var action = 'infoProducto';
+
+
+      $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        async: true,
+        data: {action:action,producto:producto},
+
+          success: function(response){
+            if (response != 'error') {
+
+              var info = JSON.parse(response);
+             // $('#producto_id').val(info.codproducto);
+              //$('.nameProducto').html(info.descripcion);
+
+              $('.bodyModal').html('<form action="" method="post" name="form_add_product" id="form_add_product" onsubmit="event.preventDefault();sendDataProduct(); ">'+
+                                      '<h1>eliminar producto</h1><br>'+
+                                      '<p>¿Está serguro que quiere eliminar el producto?<p>'+
+                                      '<h2 class="nameProducto">'+info.descripcion+'</h2><br>'+
+
+                                      '<input type="hidden" name="producto_id" id="producto_id" value="'+info.codproducto+'" required>'+
+                                      '<input type="hidden" name="action" value="addProduct" required>'+
+                                      '<div class="alert alertAddProduct"></div>'+
+
+                                      '<a href="#" class="btn_cancel" onclick="coloseModal();">Cancelar</a>'+
+                                      '<button type="submit" class="btn_new">Eliminar</button>'+
+                                    '</form>');
+
+            }
+
+          },
+
+          error: function(error) {
+            console.log(error);
+          }
+      });
+
+      $('.modal').fadeIn();
+    });
+
 });
 
 function sendDataProduct() {
