@@ -136,7 +136,20 @@ $(document).ready(function(){
       $('.modal').fadeIn();
     });
 
-});
+    //
+    $('#search_proveedor').change(function(e) {
+      e.preventDefault();
+      var gaaa = getUrl(); //gaaa es el carpeta
+      location.href = gaaa+'buscar_productos.php?proveedor='+$(this).val();
+    })
+
+});//final
+
+function getUrl() {
+  var loc = window.location;
+  var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/')+1);
+  return loc.href.substring(0, loc.href.length -((loc.pathname + loc.search + loc.hash).length - pathName.length));
+}
 
 function sendDataProduct() {
   $('.alertAddProduct').html('');

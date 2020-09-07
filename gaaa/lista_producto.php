@@ -26,7 +26,7 @@
 		<h1>lista de producto</h1>
 		<a href="registro_producto.php" class="btn_new">registrar producto</a>
 
-		<form action="buscar_producto.php" method="get" class="form_search">
+		<form action="buscar_productos.php" method="get" class="form_search">
 			<input type="text" name="busqueda" id="busqueda"  placeholder="buscar">
 			<input type="submit" value="buscar" class="btn_search">
 		</form>
@@ -37,7 +37,24 @@
 					<th>DESCRIPCIÓN</th>
 					<th>PRECIO</th>
 					<th>EXISTENCIA</th>
-					<th>PROVEEDOR</th>
+					<th>
+						<?php
+							$query_proveedor = mysqli_query($conexion,"SELECT codproveedor,proveedor FROM proveedor where estatus=1 order by proveedor ASC");
+							$result_proveedor = mysqli_num_rows($query_proveedor);
+						 ?>
+						<select name="proveedor" id="search_proveedor">
+							<option value="" selected>PROVEEDOR</option>
+							<?php
+								if ($result_proveedor > 0) {
+									while ($proveedor = mysqli_fetch_array($query_proveedor)) {
+							?>
+									<option value="<?php echo $proveedor['codproveedor']; ?>"><?php echo $proveedor['proveedor']; ?></option>
+							<?php
+									}
+								}
+							 ?>
+						</select>
+					</th>
 					<th>FOTO</th>
 					<th>ACCIONES</th>
 				</tr>
