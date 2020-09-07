@@ -229,6 +229,70 @@ $(document).ready(function(){
       });
     });
 
+    //buscar producto
+    $('#txt_cod_producto').keyup(function(e){
+      e.preventDefault();
+
+      var producto = $(this).val();
+      var action = 'infoProducto';
+      if (producto != '') {
+        $.ajax({
+          url: 'ajax.php',
+          type: "POST",
+          async: true,
+          data: {action:action,producto:producto},
+
+          success: function(response)
+          {
+            if (response != 'ERROR') {
+              var info = JSON.parse(response);
+              $('#txt_descripcion').html(info.descripcion);
+              $('#txt_existencia').html(info.existencia);
+              $('#txt_cant_producto').val('1');
+              $('#txt_precio').html(info.precio);
+              $('#txt_precio_total').html(info.precio);
+
+              //activar cantidad
+              $('#txt_cant_producto').removeAttr('disabled');
+
+              //mostrar boton agregar
+              $('#add_product_venta').slideDown();
+            } else {
+              $('#txt_descripcion').html('-');
+              $('#txt_existencia').html('-');
+              $('#txt_cant_producto').val('0');
+              $('#txt_precio').html('0.00');
+              $('#txt_precio_total').html('0.00');
+
+              // bloquear cantidad
+              $('#txt_cant_producto').attr('disabled','disabled');
+
+              //ocultar boton Agregar
+              $('#add_product_venta').slideUp();
+            }
+          },
+          error: function(error){
+          }
+        });
+      }
+    });
+
+    //validad cantidad del producto antes de Agregar
+    $('#txt_cant_producto').keyup(function(e) {
+      e.preventDefault();
+
+      var precio_total = $(this).val() * $('#txt_precio').html();
+      $('#txt_precio_total').html(precio_total);
+
+      //ocultar el boto agregar si la cantidad es menor que 1
+      if ($(this).val() < 1 || isNaN($(this).val())) {
+        $('#add_product_venta').slideUp();
+      }else {
+        $('#add_product_venta').slideDown();
+      }
+    });
+
+
 });//final
 
 function getUrl() {

@@ -13,7 +13,7 @@
 
             $producto_id = $_POST['producto'];
 
-            $query = mysqli_query($conexion,"SELECT codproducto,descripcion from producto
+            $query = mysqli_query($conexion,"SELECT codproducto,descripcion,existencia,precio from producto
                                              where codproducto=$producto_id and estatus=1");
             mysqli_close($conexion);
 

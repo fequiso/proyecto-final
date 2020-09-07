@@ -151,7 +151,7 @@
         <div class="datos">
           <div class="wd50">
             <label>Vendedor</label>
-            <p>Felisario Quispe Sopanta</p>
+            <p><?php echo $_SESSION['nombre']; ?></p>
           </div>
           <div class="wd50">
             <label>Acciones</label>
