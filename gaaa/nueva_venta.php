@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	include "../conexion.php";
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,95 +21,6 @@
     margin: 15px auto;
     text-align: center;
   }
-  /*============ Ventas ============*/
-.datos_cliente, .datos_venta, .title_page{
-	width: 100%;
-	max-width: 900px;
-	margin: auto;
-	margin-bottom: 20px;
-}
-#detalle_venta tr{
-	background-color: #FFF !important;
-}
-#detalle_venta td{
-	border-bottom: 1px solid #CCC;
-}
-.datos{
-	background-color: #e3ecef;
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flex;
-	display: -o-flex;
-	display: flex;
-	display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    border: 2px solid #78909C;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-.action_cliente{
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flex;
-	display: -o-flex;
-	display: flex;
-	align-items: center;
-}
-
-.datos label{
-	margin: 5px auto;
-}
-.wd20{
-	width: 20%;
-}
-.wd25{
-	width: 25%;
-}
-.wd30{
-	width: 30%;
-}
-.wd40{
-	width: 40%;
-}
-.wd60{
-	width: 60%;
-}
-.wd100{
-	width: 100%;
-}
-#div_registro_cliente, #add_product_venta{
-	display: none;
-}
-.displayN{
-	display: none;
-}
-.tbl_venta{
-	max-width: 900px;
-	margin: auto;
-}
-.tbl_venta tfoot td{
-	font-weight: bold;
-}
-.textright{
-	text-align: right;
-}
-.textcenter{
-	text-align: center;
-}
-.textleft{
-	text-align: left;
-}
-.btn_anular{
-	background-color: #f36a6a;
-	border: 0;
-	border-radius: 5px;
-	cursor: pointer;
-	padding: 10px;
-	margin: 0 3px;
-	color: #FFF;
-}
   </style>
 	<title>ventas</title>
 </head>
@@ -157,7 +70,7 @@
             <label>Acciones</label>
             <div id="acciones_venta">
               <a href="#" class="btn_ok textcenter" id="btn_anular_venta">Anular</a>
-              <a href="#" class="btn_new textcenter" id="btn_facturar_venta">Procesar</a>
+              <a href="#" class="btn_new textcenter" id="btn_facturar_venta" style="display: none;">Procesar</a>
             </div>
           </div>
         </div>
@@ -192,43 +105,20 @@
             </tr>
         </head>
         <tbody id="detalle_venta">
-            <tr>
-                <td>1</td>
-                <td colspan="2">Mouse USB</td>
-                <td class="textcenter">1</td>
-                <td class="textright">100.00</td>
-                <td class="textright">100.00</td>
-                <td class="">
-                    <a class="link_delete" href="#" onclick="event.preventDefault(); del_product_detalle(1);">Borrar</a>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td colspan="2">Monitor</td>
-                <td class="textcenter">2</td>
-                <td class="textright">300.00</td>
-                <td class="textright">400.00</td>
-                <td class="">
-                    <a class="link_delete" href="#" onclick="event.preventDefault(); del_product_detalle(1);">Borrar</a>
-                </td>
-            </tr>
+          <!-- contenido ajax-->
         </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="5" class="textright">SUBTOTAL S/</td>
-                <td class="textright">500</td>
-            </tr>
-            <tr>
-                <td colspan="5" class="textright">IGV (18%)</td>
-                <td class="textright">12</td>
-            </tr>
-            <tr>
-              <td colspan="5" class="textright">TOTAL S/</td>
-              <td class="textright">1000.00</td>
-            </tr>
+        <tfoot id="detalle_totales">
+         <!-- contenido ajax -->
         </tfoot>
       </table>
     </section>
 	<?php include 'includes/footer.php'; ?>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var usuarioid = '<?php echo $_SESSION['idUser']; ?>';
+			serchForDetalle(usuarioid);
+		});
+	</script>
 </body>
 </html>

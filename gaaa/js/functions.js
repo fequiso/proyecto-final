@@ -282,18 +282,167 @@ $(document).ready(function(){
       e.preventDefault();
 
       var precio_total = $(this).val() * $('#txt_precio').html();
+      var existencia = parseInt($('#txt_existencia').html());
       $('#txt_precio_total').html(precio_total);
 
       //ocultar el boto agregar si la cantidad es menor que 1
-      if ($(this).val() < 1 || isNaN($(this).val())) {
+      if (($(this).val() < 1 || isNaN($(this).val())) || ($(this).val() > existencia)) {
         $('#add_product_venta').slideUp();
       }else {
         $('#add_product_venta').slideDown();
       }
     });
 
+    //agregar el producto al cliente
+    $('#add_product_venta').click(function(e) {
+      e.preventDefault();
 
-});//final
+      if ($('#txt_cant_producto').val() > 0) {
+        var codproducto = $('#txt_cod_producto').val();
+        var cantidad = $('#txt_cant_producto').val();
+        var action = 'addProductoDetalle';
+
+        $.ajax({
+          url: 'ajax.php',
+          type: "POST",
+          async: true,
+          data: {action:action,producto:codproducto,cantidad:cantidad},
+
+          success: function(response)
+          {
+            if (response != 'error') {
+              var info = JSON.parse(response);
+              $('#detalle_venta').html(info.detalle);
+              $('#detalle_totales').html(info.totales);
+
+              $('#txt_cod_producto').val('');
+              $('#txt_descripcion').html('-');
+              $('#txt_existencia').html('-');
+              $('#txt_cant_producto').val('0');
+              $('#txt_precio').html('0.00');
+              $('#txt_precio_total').html('0.00');
+
+              //bloquear Cantidad
+              $('#txt_cant_producto').attr('disabled','disabled');
+
+              //ocultar boton agregar
+              $('#add_product_venta').slideUp();
+
+            }else {
+              console.log('no data');
+            }
+            viewProcesar();
+          },
+          error: function(error){
+          }
+        });
+      }
+    });
+
+    //anular venta
+    $('#btn_anular_venta').click(function(e) {
+      e.preventDefault();
+
+      var rows = $('#detalle_venta tr').length;
+      if (rows > 0) {
+        var action = 'anularVenta';
+
+        $.ajax({
+          url: 'ajax.php',
+          type: "POST",
+          async: true,
+          data: {action:action},
+
+          success: function(response)
+          {
+              if (response != 'error')
+              {
+                location.reload();
+              }
+          },
+          error: function(error){
+          }
+        });
+      }
+    });
+
+});//final gaaaaaaaaaaaaaaaaaaaaaaaa
+
+//eliminar
+function del_product_detalle(correlativo) {
+  var action = 'delProductoDetalle';
+  var id_detalle = correlativo;
+      $.ajax({
+        url: 'ajax.php',
+        type: "POST",
+        async: true,
+        data: {action:action,id_detalle:id_detalle},
+
+        success: function(response)
+        {
+            if (response != 'error') {
+              var info = JSON.parse(response);
+
+              $('#detalle_venta').html(info.detalle);
+              $('#detalle_totales').html(info.totales);
+
+              $('#txt_cod_producto').val('');
+              $('#txt_descripcion').html('-');
+              $('#txt_existencia').html('-');
+              $('#txt_cant_producto').val('0');
+              $('#txt_precio').html('0.00');
+              $('#txt_precio_total').html('0.00');
+
+              //bloquear Cantidad
+              $('#txt_cant_producto').attr('disabled','disabled');
+
+              //ocultar boton agregar
+              $('#add_product_venta').slideUp();
+
+            }else {
+              $('#detalle_venta').html('');
+              $('#detalle_totales').html('');
+            }
+            viewProcesar();
+        },
+        error: function(error){
+        }
+      });
+}
+
+//mostrar/ocultar boton porcesar
+function viewProcesar() {
+  if ($('#detalle_venta tr').length > 0) {
+      $('#btn_facturar_venta').show();
+  }else {
+      $('#btn_facturar_venta').hide();
+  }
+}
+
+function serchForDetalle(id){
+  var action = 'serchForDetalle';
+  var user = id;
+      $.ajax({
+        url: 'ajax.php',
+        type: "POST",
+        async: true,
+        data: {action:action,user:user},
+
+        success: function(response)
+        {
+            if (response != 'error') {
+              var info = JSON.parse(response);
+              $('#detalle_venta').html(info.detalle);
+              $('#detalle_totales').html(info.totales);
+            }else {
+              console.log('no data');
+            }
+            viewProcesar();
+        },
+        error: function(error){
+        }
+      });
+}
 
 function getUrl() {
   var loc = window.location;
